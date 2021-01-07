@@ -7,7 +7,8 @@ const { SSL, PORT, DATABASE_URL } = require('./config')
 const db = knex({
   client: 'pg',
   connection: DATABASE_URL,
-  ssl: SSL
+  ssl: SSL,
+  SSL: SSL
 })
 
 app.set('db', db)
