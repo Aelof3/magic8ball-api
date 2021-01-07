@@ -21,6 +21,7 @@ const AskService = {
         "questions.question",
         "answers.answer"
       )
+      .orderBy('questions.id','asc')
       .limit(10)
   },
 
