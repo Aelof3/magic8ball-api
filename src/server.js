@@ -2,13 +2,13 @@ require('dotenv').config()
 
 const knex = require('knex')
 const app = require('./app')
-const { SSL, PORT, DATABASE_URL } = require('./config')
+const { PORT, DATABASE_URL } = require('./config')
 
 const db = knex({
   client: 'pg',
   debug: true,
   connection: DATABASE_URL,
-  ssl: SSL
+  ssl: true
 })
 
 app.set('db', db)
