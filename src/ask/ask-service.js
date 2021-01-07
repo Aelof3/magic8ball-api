@@ -21,7 +21,7 @@ const AskService = {
         "questions.question",
         "answers.answer"
       )
-      .orderBy('questions.id','asc')
+      .orderBy('questions.id','desc')
       .limit(10)
   },
 
