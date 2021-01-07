@@ -9,6 +9,7 @@ const AskService = {
         "questions.question",
         "answers.answer"
       )
+      .orderBy('questions.id','desc')
       .where("user.id","=",`${user_id}`)
   },
 
@@ -16,10 +17,12 @@ const AskService = {
     return db
       .from("questions")
       .join("answers", "questions.answer_id", "=", "answers.id")
+      .join("user","questions.user_ask_id","=","user.id")
       .select(
         "questions.user_ask_id",
         "questions.question",
-        "answers.answer"
+        "answers.answer",
+        "user.username"
       )
       .orderBy('questions.id','desc')
       .limit(10)
