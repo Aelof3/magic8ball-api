@@ -1,5 +1,3 @@
-const { LinkedList } = require("../linkedlist/linkedlist");
-
 const AskService = {
   getUsersQuestions(db, user_id) {
     return db
