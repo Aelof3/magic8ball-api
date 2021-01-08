@@ -31,29 +31,29 @@ ___
 ___
 #### API endpoints:
 * /api/user
-    > **POST**
-    > request - username, password, name
-    > response - serialized user
+    > **POST**  
+    > request - username, password, name  
+    > response - serialized user  
 * /api/auth/token
-    > **POST**
-    > request - username, password
-    > response - auth token
-    > **PUT**
-    > request - user id, user name
-    > response - token
+    > **POST**  
+    > request - username, password  
+    > response - auth token  
+    > **PUT**  
+    > request - user id, user name  
+    > response - token  
 
 * /api/ask
-    > **GET**
-    > request - no parameters
-    > response - array of questions
+    > **GET**  
+    > request - no parameters  
+    > response - array of questions  
 * /api/ask/user/:user_id
-    > **GET**
-    > request - user_id in url
-    > response - list of questions from user
-    > **POST**
-    > request - user_id in url, question in body
-    > response - answer_id
+    > **GET**  
+    > request - user_id in url  
+    > response - list of questions from user  
+    > **POST**  
+    > request - user_id in url, question in body  
+    > response - answer_id  
 * /api/ask/answers
-    > **GET**
-    > request - no parameters
-    > response - list of the possible 8 ball answers
+    > **GET**  
+    > request - no parameters  
+    > response - list of the possible 8 ball answers  
