@@ -11,6 +11,7 @@ const AskService = {
       )
       .orderBy('questions.id','desc')
       .where("user.id","=",`${user_id}`)
+      .limit(10)
   },
 
   getRecentQuestions(db) {
