@@ -35,6 +35,35 @@ function makeUsersArray() {
 }
 
 /**
+ * create a knex instance connected to postgres
+ * @returns {array} of user objects
+ */
+function makeAnswersArray() {
+  return [
+    { id: 1, answer: 'As I see it, yes.' },
+    { id: 2, answer: 'Ask again later.' },
+    { id: 3, answer: 'Better not tell you now.' },
+    { id: 4, answer: 'Cannot predict now.' },
+    { id: 5, answer: 'Concentrate and ask again.' },
+    { id: 6, answer: 'Don’t count on it.' },
+    { id: 7, answer: 'It is certain.' },
+    { id: 8, answer: 'It is decidedly so.' },
+    { id: 9, answer: 'Most likely.' },
+    { id: 10, answer: 'My reply is no.' },
+    { id: 11, answer: 'My sources say no.' },
+    { id: 12, answer: 'Outlook not so good.' },
+    { id: 13, answer: 'Outlook good.' },
+    { id: 14, answer: 'Reply hazy, try again.' },
+    { id: 15, answer: 'Signs point to yes.' },
+    { id: 16, answer: 'Very doubtful.' },
+    { id: 17, answer: 'Without a doubt.' },
+    { id: 18, answer: 'Yes.' },
+    { id: 19, answer: 'Yes – definitely.' },
+    { id: 20, answer: 'You may rely on it.' }
+  ]
+}
+
+/**
  * make a bearer token with jwt for authorization header
  * @param {object} user - contains `id`, `username`
  * @param {string} secret - used to create the JWT
@@ -60,14 +89,14 @@ function cleanTables(db) {
         "answers",
         "questions",
         "user"`
-      )
+    )
       .then(() =>
         Promise.all([
-          trx.raw(`ALTER SEQUENCE word_id_seq minvalue 0 START WITH 1`),
-          trx.raw(`ALTER SEQUENCE language_id_seq minvalue 0 START WITH 1`),
+          trx.raw(`ALTER SEQUENCE answers_id_seq minvalue 0 START WITH 1`),
+          trx.raw(`ALTER SEQUENCE questions_id_seq minvalue 0 START WITH 1`),
           trx.raw(`ALTER SEQUENCE user_id_seq minvalue 0 START WITH 1`),
-          trx.raw(`SELECT setval('word_id_seq', 0)`),
-          trx.raw(`SELECT setval('language_id_seq', 0)`),
+          trx.raw(`SELECT setval('answers_id_seq', 0)`),
+          trx.raw(`SELECT setval('questions_id_seq', 0)`),
           trx.raw(`SELECT setval('user_id_seq', 0)`),
         ])
       )
@@ -95,12 +124,25 @@ function seedUsers(db, users) {
   })
 }
 
+/**
+ * insert users into db with bcrypted passwords and update sequence
+ * @param {knex instance} db
+ * @param {array} users - array of user objects for insertion
+ * @returns {Promise} - when users table seeded
+ */
+function seedAnswers(db, answers) {
+
+  return db.transaction(async trx => {
+    await trx.into('answers').insert(answers)
+  })
+}
+
 module.exports = {
   makeKnexInstance,
   makeUsersArray,
-  makeLanguagesAndWords,
+  makeAnswersArray,
   makeAuthHeader,
   cleanTables,
   seedUsers,
-  seedUsersLanguagesWords,
+  seedAnswers,
 }
